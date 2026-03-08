@@ -1,22 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-base-200">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashbord GitHub Issue Tracker</title>
 
+    <!-- Geist Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
 
+    <!-- Tailwind + DasiyUI CDN link -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
 
+    <!-- font awsome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-
+    <!-- CSS file connection -->
     <link rel="stylesheet" href="./styles/style.css">
+
 </head>
+
 <body>
-   
+
+    <header>
+        <nav class="bg-white shadow-sm p-4 md:px-12">
+
+            <!-- container div -->
+            <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 ">
+
+                <!-- content div -->
+                <div class="flex items-center gap-2 justify-center md:justify-start">
+                    <img class="w-8 md:w-10" src="./assets/github-logo.png">
+                    <h1 class="text-lg md:text-xl font-bold">GitHub Issues Tracker</h1>
+                </div>
+
+                <!-- search bar and btn div  -->
+                <div class="flex items-center gap-3">
+
+                    <!-- daisyUi searchbox -->
+                    <label class="input input-sm md:input-md">
+                        <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
+                                stroke="currentColor">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.3-4.3"></path>
+                            </g>
+                        </svg>
+                        <input id="search-input" type="search" required placeholder="Search issues..." />
+                    </label>
+
+                    <!-- button  -->
+                    <button
+                        class="btn btn-sm md:btn-md btn-primary hover:scale-105 hover:shadow-md transition-all duration-300"><i
+                            class="fa-solid fa-plus"></i>New Issue</button>
+
+                </div>
+            </div>
+        </nav>
+    </header>
 
 
+    <!-- main content section -->
+    <main class="max-w-7xl mx-auto mt-5 md:mt-10 px-2">
+
+        <!-- toggle btn box-1-->
+        <div class="flex bg-white p-3 md:p-5 gap-4 rounded shadow">
+            <button id="btn-all" class="btn btn-sm btn-primary px-6">All</button>
+            <button id="btn-open" class="btn btn-sm px-6">Open</button>
+            <button id="btn-closed" class="btn btn-sm px-6">Closed</button>
+        </div>
+
+        <!-- issue container box-2-->
+        <div class="flex flex-row items-center justify-between bg-white p-3 md:p-5 rounded shadow mt-5 mb-8">
+
+            <!-- content container-->
+            <div class="flex items-center gap-2 md:gap-4">
+
+                <!-- image box -->
+                <div class="bg-purple-100 p-2 rounded-full">
+                    <img src="./assets/Aperture.png">
+                </div>
+
+                <!-- issue and paragraf text box-->
+                <div>
+                    <h3 class="text-sm md:text-xl font-bold">
+                        <span id="total-issue-count">50</span> Issues
+                    </h3>
+                    <p class="hidden md:block text-sm text-gray-500 mt-1">Track and manage your project issues</p>
+                </div>
+            </div>
+
+            <!-- status icon -->
+            <div class="flex flex-row items-center gap-3 md:gap-6">
+                <div class="flex items-center gap-1 md:gap-2">
+                    <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-green-500"></span>
+                    <span class="text-[10px] md:text-sm font-medium text-gray-600">Open</span>
+                </div>
+
+                <div class="flex items-center gap-1 md:gap-2 text-nowrap">
+                    <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-purple-500"></span>
+                    <span class="text-[10px] md:text-sm font-medium text-gray-600">Closed</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="issue-container" class="grid grid-cols-1 md:grid-cols-4 gap-6"></div>
+    </main>
 
 
 
 </body>
+
 </html>
