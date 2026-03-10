@@ -73,6 +73,9 @@ const displayIssues = (issues) => {
         // 3-6: parent div card design
         newCardDiv.className = `card bg-white p-4 shadow-md rounded-lg border-t-4 ${cardBorder} h-full flex flex-col justify-between`
 
+        // 3-9: modal click event set
+        newCardDiv.setAttribute('onclick', `showModalDetails('${issue.id}')`);
+
         // 3-7: daisyUi level badge
         const labelsBox = issue.labels.map(label =>
             `<div class="badge badge-dash badge-primary"><i class="fa-solid fa-circle-info"></i>
@@ -132,23 +135,59 @@ searchInput.addEventListener('keyup', (event) => {
     // user data collect
     const searchText = event.target.value.toLowerCase();
 
+    if (searchText === "") {
+        loadAllIssues();
+        return;
+    }
+
     // 6-1: api call
-    const url = 'https://phi-lab-server.vercel.app/api/v1/lab/issues'
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`;
     fetch(url)
         .then((res) => res.json())
         .then(obj => {
 
-            const allIssues = obj.data;
-
-            //6-2: filtering title and description 
-            const search = allIssues.filter(issue =>
-                issue.title.toLowerCase().includes(searchText) ||
-                issue.description.toLowerCase().includes(searchText)
-            );
-            displayIssues(search)
-
+            displayIssues(obj.data);
         })
 })
+
+//07: modal function
+const showModalDetails = (id) => {
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
+        .then(res => res.json())
+        .then(data => {
+            const issue = data.data;
+
+            // 7-1: get the Element
+            document.getElementById('modal-title').innerText = issue.title;
+            document.getElementById('modal-description').innerText = issue.description;
+            document.getElementById('modal-status').innerText = issue.status;
+            document.getElementById('modal-author').innerText = `Opened by ${issue.author}`;
+            document.getElementById('modal-priority').innerText = issue.priority;
+
+            // 7-1: modal status change 
+            const modalStatus = document.getElementById("modal-status")
+            modalStatus.innerText = issue.status;
+
+            // 7-2: update modal badge color status 
+            if (issue.status === 'open') {
+                modalStatus.className = "badge badge-success"
+            } else {
+                modalStatus.className = "badge badge-error"
+            }
+
+            // 7-3: showing level on modal
+            const modalLabels = document.getElementById('modal-labels');
+            // 7-4; map function
+            modalLabels.innerHTML = issue.labels.map(labels =>
+                `<span class="badge badge-soft badge-primary capitalize">${labels}</span>`
+            ).join("");
+
+            //7-5- open modal
+            const modal = document.getElementById('show-modal');
+            modal.showModal();
+
+        })
+}
 
 // function call
 loadAllIssues()

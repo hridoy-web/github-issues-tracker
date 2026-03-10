@@ -110,23 +110,49 @@
         </div>
 
         <!-- daisyUi loading spinner  -->
-   <div id="loading-spinner" class="hidden flex justify-center items-center my-10">
-<span class="loading loading-infinity loading-xs"></span>
-<span class="loading loading-infinity loading-sm"></span>
-<span class="loading loading-infinity loading-md"></span>
-<span class="loading loading-infinity loading-lg"></span>
-<span class="loading loading-infinity loading-xl"></span>
-</div>
+        <div id="loading-spinner" class="hidden flex justify-center items-center my-10">
+            <span class="loading loading-infinity loading-xs"></span>
+            <span class="loading loading-infinity loading-sm"></span>
+            <span class="loading loading-infinity loading-md"></span>
+            <span class="loading loading-infinity loading-lg"></span>
+            <span class="loading loading-infinity loading-xl"></span>
+        </div>
 
-         <!-- showing Api data content -->
-        <div id="issue-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-base-300 mb-8"></div>
+        <!-- showing Api data content -->
+        <div id="issue-container"
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-base-300 mb-8"></div>
     </main>
 
-    <!-- card -->
-   <!-- <div class="card bg-white p-4"> -->
+    <!-- daisyUI modal -->
+    <dialog id="show-modal" class="modal">
 
+        <div class="modal-box max-w-2xl">
 
-<script src="script/dashboard.js"></script>
+            <h3 id="modal-title" class="text-xl font-bold mb-2"></h3>
+
+            <div class="flex items-center gap-2 mb-2">
+                <span id="modal-status" class="badge badge-success font-medium"></span>
+                <span id="modal-author" class="text-xs text-gray-600"></span>
+            </div>
+            <div id="modal-labels" class="flex flex-wrap gap-1 my-3"></div>
+
+            <p id="modal-description" class="py-4 text-gray-600 text-sm border-t border-gray-100"></p>
+
+            <div class="flex justify-between items-center mt-4 p-4 bg-gray-50 rounded-lg">
+                <div class="flex flex-col gap-1">
+                    <p class="uppercase text-sm font-semibold">Priority</p>
+                    <p id="modal-priority" class="badge badge-sm badge-secondary"></p>
+                </div>
+                <div class="modal-action mt-0">
+                    <form method="dialog">
+                        <button class="btn btn-primary px-8">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="script/dashboard.js"></script>
 </body>
 
 </html>
